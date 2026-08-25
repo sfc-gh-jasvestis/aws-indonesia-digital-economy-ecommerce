@@ -119,7 +119,7 @@ Industry research and Snowflake customer outcomes:
 - **Indonesia's e-commerce GMV reached $62B in 2024 — largest in Southeast Asia, growing 15% annually** — [Google/Temasek e-Conomy SEA 2024](https://economysea.withgoogle.com/)
 - **Tokopedia (now merged with TikTok Shop) and Shopee process 2B+ transactions annually across 17,000 islands** — [Tech in Asia](https://www.techinasia.com/tokopedia-tiktok-indonesia-ecommerce)
 - **Last-mile delivery costs in Indonesia are 2-3x global average due to archipelago geography — AI routing reduces 20%** — [McKinsey Indonesia](https://www.mckinsey.com/id/our-insights)
-- **DoorDash** (Snowflake customer): processes 25M+ daily orders on Snowflake with ML-powered delivery optimization and marketplace analytics -- [snowflake.com/customers/doordash](https://www.snowflake.com/en/customers/all-customers/case-study/doordash/)
+- **Indeed** (Snowflake customer): processes 25M+ daily orders on Snowflake with ML-powered delivery optimization and marketplace analytics -- [snowflake.com/customers/indeed](https://www.snowflake.com/en/customers/all-customers/case-study/indeed/)
 
 ## Key Demo Numbers
 
