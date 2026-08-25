@@ -8,7 +8,7 @@ USE SCHEMA APP;
 CREATE OR REPLACE NOTIFICATION INTEGRATION aws_indonesia_digital_economy_ecommerce_EMAIL_INT
   TYPE = EMAIL
   ENABLED = TRUE
-  ALLOWED_RECIPIENTS = ('jonathan.asvestis@snowflake.com');
+  ALLOWED_RECIPIENTS = ('<YOUR_EMAIL>');
 
 -- Alert: GMV_DECLINE_ALERT
 CREATE OR REPLACE ALERT APP.GMV_DECLINE_ALERT
@@ -22,7 +22,7 @@ IF (EXISTS (
 THEN
   CALL SYSTEM$SEND_EMAIL(
     'aws_indonesia_digital_economy_ecommerce_EMAIL_INT',
-    'jonathan.asvestis@snowflake.com',
+    '<YOUR_EMAIL>',
     '[ALERT] E-Commerce Marketplace Analytics: Significant GMV decline detected — investigate category and seller performance',
     'Significant GMV decline detected — investigate category and seller performance'
   );
@@ -41,7 +41,7 @@ IF (EXISTS (
 THEN
   CALL SYSTEM$SEND_EMAIL(
     'aws_indonesia_digital_economy_ecommerce_EMAIL_INT',
-    'jonathan.asvestis@snowflake.com',
+    '<YOUR_EMAIL>',
     '[ALERT] E-Commerce Marketplace Analytics: High-value seller at critical churn risk',
     'High-value seller at critical churn risk'
   );
