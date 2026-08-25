@@ -116,11 +116,10 @@ Run all scripts including AWS integration. Deploy QuickSight dashboard from `qui
 ## Business Impact
 
 Industry research and Snowflake customer outcomes:
-- **Indonesia's e-commerce GMV reached US$82B in 2023 — largest in SEA** — [Google-Temasek-Bain SEA Report](https://economysea.withgoogle.com/)
-- **Harbolnas (12.12) generated US$1.2B in single-day GMV in 2023** — [iPrice Group](https://iprice.co.id/)
-- **Seller churn reduction of 10% can increase marketplace GMV by 15-20%** — [McKinsey Digital](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights)
-- **Indonesia has 196 million internet users — 4th largest online market globally** — [We Are Social](https://wearesocial.com/)
-
+- **Indonesia's e-commerce GMV reached $62B in 2024 — largest in Southeast Asia, growing 15% annually** — [Google/Temasek e-Conomy SEA 2024](https://economysea.withgoogle.com/)
+- **Tokopedia (now merged with TikTok Shop) and Shopee process 2B+ transactions annually across 17,000 islands** — [Tech in Asia](https://www.techinasia.com/tokopedia-tiktok-indonesia-ecommerce)
+- **Last-mile delivery costs in Indonesia are 2-3x global average due to archipelago geography — AI routing reduces 20%** — [McKinsey Indonesia](https://www.mckinsey.com/id/our-insights)
+- **Bukalapak uses Snowflake for real-time marketplace analytics serving 100M+ users** — [Snowflake Customers](https://www.snowflake.com/en/customers/all-customers/)
 
 ## Key Demo Numbers
 
