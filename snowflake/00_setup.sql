@@ -1,16 +1,13 @@
--- ============================================================================
--- E-Commerce Marketplace Analytics
--- Seller and buyer intelligence for Indonesia's US$82B e-commerce market — ML.FORECAST projects GMV growth, Dynamic Tables build real-time marketplace dashboards, and Cortex AI generates seller recommendations.
--- ============================================================================
-USE ROLE ACCOUNTADMIN;
-CREATE DATABASE IF NOT EXISTS ECOMMERCE_ANALYTICS;
-CREATE WAREHOUSE IF NOT EXISTS ECOM_WH WAREHOUSE_SIZE = 'MEDIUM' AUTO_SUSPEND = 120 AUTO_RESUME = TRUE;
-USE DATABASE ECOMMERCE_ANALYTICS;
-CREATE SCHEMA IF NOT EXISTS RAW;
-CREATE SCHEMA IF NOT EXISTS CURATED;
-CREATE SCHEMA IF NOT EXISTS ML;
-CREATE SCHEMA IF NOT EXISTS AI;
-CREATE SCHEMA IF NOT EXISTS SEARCH;
-CREATE SCHEMA IF NOT EXISTS APP;
+-- Generated from generator/demo_specs/aws-indonesia-digital-economy-ecommerce.json
+-- Regenerate with: python3 generator/gen_repo_docs.py aws-indonesia-digital-economy-ecommerce
+-- This is the schema that is actually deployed for ID_DIGITAL_ECONOMY_ECOMMERCE.
 
-USE WAREHOUSE ECOM_WH;
+-- ID_DIGITAL_ECONOMY_ECOMMERCE  (E-Commerce Marketplace Analytics)
+-- generated from generator/demo_specs/aws-indonesia-digital-economy-ecommerce.json - do not hand-edit
+CREATE DATABASE IF NOT EXISTS ID_DIGITAL_ECONOMY_ECOMMERCE;
+CREATE SCHEMA IF NOT EXISTS ID_DIGITAL_ECONOMY_ECOMMERCE.RAW;
+CREATE SCHEMA IF NOT EXISTS ID_DIGITAL_ECONOMY_ECOMMERCE.CURATED;
+CREATE SCHEMA IF NOT EXISTS ID_DIGITAL_ECONOMY_ECOMMERCE.APP;
+USE DATABASE ID_DIGITAL_ECONOMY_ECOMMERCE;
+
+-- 5 real regions; entity names carry their region so the two always agree
