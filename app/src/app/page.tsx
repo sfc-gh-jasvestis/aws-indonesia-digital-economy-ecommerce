@@ -53,6 +53,7 @@ export default function HomePage() {
         <div className="lg:col-span-1">
           <GeoMap
             country="indonesia"
+            labels={{ entity: 'Merchants', event: 'Orders', alert: 'Frauds' }}
             regions={data?.regions}
             markers={[{"label": "Jakarta", "value": "Core: 42M users", "color": "blue", "size": "lg"}, {"label": "Surabaya", "value": "East Java: 8M", "color": "blue", "size": "md"}, {"label": "Bandung", "value": "W.Java: 6M", "color": "green", "size": "md"}, {"label": "Medan", "value": "Sumatra: 4M", "color": "green", "size": "md"}, {"label": "Makassar", "value": "E.Indonesia: 2M", "color": "amber", "size": "sm"}]}
             routes={[]}
@@ -83,8 +84,13 @@ export default function HomePage() {
         columns={[
           { key: 'id', header: 'Rank' },
           { key: 'name', header: 'Merchant' },
+          { key: 'region', header: 'Region' },
           { key: 'status', header: 'Growth' },
-          { key: 'value', header: 'GMV (Rp B)' },
+          { key: 'm1', header: 'GMV (Rp B)' },
+          { key: 'm2', header: 'Order Value' },
+          { key: 'm3', header: 'Repeat Purchase' },
+          { key: 'events', header: 'Orders' },
+          { key: 'alerts', header: 'Frauds' },
         ]}
         data={data?.entities || []}
         title="Top Merchant Performance"
