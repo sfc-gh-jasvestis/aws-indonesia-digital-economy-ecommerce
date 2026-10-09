@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "repo": "aws-indonesia-digital-economy-ecommerce",
+  "operation": "on-demand",
+  "data_classification": "synthetic demonstration only",
+  "currency": "IDR",
+  "grains": {
+    "RAW.SELLERS": "one row per marketplace seller (city and product category)",
+    "RAW.SELLER_DAILY": "one row per seller per day (90 days)",
+    "RAW.COMPLIANCE_DOCUMENTS": "one row per seller (compliance document snapshot)",
+    "CURATED.PERFORMANCE_SUMMARY": "one row per seller",
+    "CURATED.TREND_ANALYSIS": "one row per day",
+    "CURATED.ISSUE_SUMMARY": "one row per order issue type",
+    "CURATED.KPI_SUMMARY": "one row per KPI",
+    "ML.CANCEL_RISK_SCORES": "one row per seller (latest day)"
+  },
+  "metrics": {
+    "Clean Order Rate": "100 * (SUM(ORDER_COUNT) - SUM(ISSUE_COUNT)) / SUM(ORDER_COUNT)",
+    "Order Issues Raised": "SUM(ISSUE_COUNT)",
+    "Cancelled Orders": "SUM(CANCELLED_COUNT)",
+    "Issue Cancellation Rate": "100 * SUM(CANCELLED_COUNT) / SUM(ISSUE_COUNT)",
+    "Late Deliveries": "SUM(LATE_DELIVERY)",
+    "GMV (IDR B)": "SUM(GMV_IDR) / 1e9",
+    "Orders Processed": "SUM(ORDER_COUNT)",
+    "Stock Sync Compliance": "100 * SUM(STOCK_SYNC_DONE) / SUM(STOCK_SYNC_DUE)",
+    "Sellers Monitored": "COUNT(RAW.SELLERS)",
+    "Compliance Document Coverage": "100 * SUM(LEAST(ON_FILE_QTY, REQUIRED_QTY)) / SUM(REQUIRED_QTY)",
+    "Compliance Documents Pending": "SUM(PENDING_QTY)"
+  },
+  "chart_bindings": {
+    "daily_order_issues": [
+      "CURATED.TREND_ANALYSIS.METRIC_DATE",
+      "ISSUE_COUNT",
+      "CANCELLED_COUNT"
+    ],
+    "issues_by_type": [
+      "CURATED.ISSUE_SUMMARY.ISSUE_TYPE",
+      "ISSUE_COUNT",
+      "CANCELLED_COUNT"
+    ],
+    "stock_sync_vs_cancelled": [
+      "CURATED.PERFORMANCE_SUMMARY.STOCK_SYNC_PCT",
+      "CANCELLED_COUNT"
+    ],
+    "quicksight_cancel_risk": [
+      "ENTITY_ID",
+      "MAX(CANCEL_PROB_7D)"
+    ]
+  },
+  "freshness": "MAX(EVENT_DATE) is an observation watermark; requestedAt is not freshness",
+  "required_capabilities": {
+    "core_pipeline": "Curated KPIs reconcile to a RAW recomputation (run_core.py checks this on every build)",
+    "forecast_and_anomaly": "14-day marketplace-wide order-issue FORECAST; return rate ANOMALY_DETECTION (train 75 days, detect last 15)",
+    "search": "Cortex Search SEARCH.ISSUE_SOP_SEARCH over synthetic order-issue handling SOPs (one per product category and issue type)",
+    "semantic_analytics": "Semantic view APP.MARKETPLACE_ANALYTICS and Cortex Agent APP.MARKETPLACE_AGENT using analyst + search tools",
+    "grounded_ai": "Agent answers return generated SQL and SOP citations; the action memo uses only KPI, seller, issue-type and risk rows",
+    "quicksight": "DIRECT_QUERY dashboard (sellers, daily order issues, cancelled orders by seller, order-cancellation risk, order events loaded) through a read-only Snowflake service user",
+    "quicksight_q": "Amazon Q topic over the curated datasets for natural-language questions",
+    "aws_ingestion": "Amazon Data Firehose -> S3 -> Snowpipe AUTO_INGEST into RAW.LIVE_ORDERS",
+    "notifications": "APP.LIVE_ORDER_ALERT logs new ISSUE events to APP.ALERT_LOG and emails via SYSTEM$SEND_EMAIL; alert and tasks suspended between demos",
+    "orchestration": "Task graph APP.TASK_REFRESH_CURATED -> APP.TASK_RESCORE_RISK run on demand (EXECUTE TASK)",
+    "app_deployment": "SPCS service APP.ID_ECOM_APP; routes /api/data, /api/ask, /api/agent",
+    "cancel_risk_model": "Snowflake ML CLASSIFICATION of P(cancelled order for the seller in the next 7 days), evaluated on an out-of-time holdout"
+  },
+  "builds": {
+    "snowflake": {
+      "database": "INDONESIA_ECOMMERCE_SNOWFLAKE",
+      "app_setting": "DEMO_PLATFORM=snowflake",
+      "memo": "Cortex AI_COMPLETE (claude-sonnet-4-5)",
+      "live_orders": "APP.SIMULATE_ORDERS(n)"
+    },
+    "aws": {
+      "database": "INDONESIA_ECOMMERCE_AWS",
+      "app_setting": "DEMO_PLATFORM=aws",
+      "memo": "Amazon Bedrock Claude Sonnet 4.5 via APP.BEDROCK_GENERATE",
+      "capabilities": "see required_capabilities",
+      "live_orders": "Amazon Data Firehose -> S3 -> Snowpipe"
+    }
+  }
+}
